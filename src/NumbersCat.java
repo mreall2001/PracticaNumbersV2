@@ -76,13 +76,7 @@ public class NumbersCat {
     public static String oper(String s) {
         long[] arrOperadores = ArrayDeOperadores(s);
         String[] arrSignos = ArraydeSignos(s);
-        long resultado = 0;
-
-        if (arrOperadores[0] == 0){
-            resultado = arrOperadores[1] * -1;
-        } else {
-            resultado = arrOperadores[0];
-        }
+        long resultado = arrOperadores[0];
 
 
 
@@ -791,7 +785,7 @@ public class NumbersCat {
         for (int i = 0; i < arrCompleta.length; i++) {
             if (Objects.equals(arrCompleta[i], "més")){
                 tOperaciones++;
-            } else if (Objects.equals(arrCompleta[i], "menys")) {
+            } else if (Objects.equals(arrCompleta[i], "menys") && i != 0) {
                 tOperaciones++;
             } else if (Objects.equals(arrCompleta[i], "per")) {
                 tOperaciones++;
@@ -805,7 +799,22 @@ public class NumbersCat {
         int indiceArrOperadores = 0;
         int indiceUltimoOperador = 0;
         for (int i = 0; i < arrCompleta.length; i++) {
-            if (Objects.equals(arrCompleta[i], "més") || Objects.equals(arrCompleta[i], "menys") || Objects.equals(arrCompleta[i], "per") || Objects.equals(arrCompleta[i], "dividit")){
+            if (Objects.equals(arrCompleta[i], "més")){
+                arrOperadores[indiceArrOperadores] = words(operador);
+                indiceArrOperadores++;
+                operador = "";
+                indiceUltimoOperador = i;
+            } else if (Objects.equals(arrCompleta[i], "menys") && i != 0) {
+                arrOperadores[indiceArrOperadores] = words(operador);
+                indiceArrOperadores++;
+                operador = "";
+                indiceUltimoOperador = i;
+            } else if (Objects.equals(arrCompleta[i], "per")) {
+                arrOperadores[indiceArrOperadores] = words(operador);
+                indiceArrOperadores++;
+                operador = "";
+                indiceUltimoOperador = i;
+            } else if (Objects.equals(arrCompleta[i], "dividit")) {
                 arrOperadores[indiceArrOperadores] = words(operador);
                 indiceArrOperadores++;
                 operador = "";
@@ -827,7 +836,7 @@ public class NumbersCat {
         for (int i = 0; i < arrCompleta.length; i++) {
             if (Objects.equals(arrCompleta[i], "més")){
                 operadores += arrCompleta[i] + " ";
-            } else if (Objects.equals(arrCompleta[i], "menys") && !Objects.equals(arrCompleta[0], "menys") ) {
+            } else if (Objects.equals(arrCompleta[i], "menys") && i != 0 ) {
                 operadores += arrCompleta[i] + " ";
             } else if (Objects.equals(arrCompleta[i], "per")) {
                 operadores += arrCompleta[i] + " ";
